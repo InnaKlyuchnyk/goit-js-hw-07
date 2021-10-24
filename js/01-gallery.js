@@ -1,6 +1,10 @@
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
+// const basicLightbox = require("basiclightbox");
+
+// import * as basicLightbox from "basiclightbox";
+
 console.log(galleryItems);
 
 const galleryContainer = document.querySelector(".gallery");
@@ -29,8 +33,20 @@ function createGalleryImagesMarkup(galleryItems) {
     .join("");
 }
 
-function onImageClick() {
+function onImageClick(event) {
   console.log("клик по картинке");
+  event.preventDefault();
+  const image = event.target.dataset.source;
 
-  //   event.preventDefault();
+  const instance = basicLightbox.create(
+    `<img src="${image}" width="800" height="600">`,
+    {
+      onShow: (instance) => {
+        instance.element().querySelector("img").onclick = instance.close;
+      },
+    }
+  );
+  console.log(image);
+
+  instance.show();
 }
