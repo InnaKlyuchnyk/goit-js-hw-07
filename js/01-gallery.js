@@ -37,6 +37,15 @@ function onImageClick(event) {
     `<img src="${url}" width="800" height="600">`,
     {
       onShow: (instance) => {
+        window.addEventListener("keydown", onEscapeClick);
+        function onEscapeClick(e) {
+          if (e.code === "Escape") {
+            instance.close();
+            window.removeEventListener("keydown", onEscapeClick);
+          }
+          console.log("клик на кнопку:", e.code);
+        }
+
         instance.element().querySelector("img").onclick = instance.close;
       },
     }
