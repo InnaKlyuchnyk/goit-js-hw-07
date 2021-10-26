@@ -31,6 +31,10 @@ function createGalleryImagesMarkup(galleryItems) {
 
 function onImageClick(event) {
   event.preventDefault();
+  if (!event.target.classList.contains("gallery__image")) {
+    return;
+  }
+
   const url = event.target.dataset.source;
 
   const instance = basicLightbox.create(
